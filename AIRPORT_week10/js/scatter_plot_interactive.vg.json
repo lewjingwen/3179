@@ -1,0 +1,145 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 800,
+  "height": 600,
+  "title": "Airport Traffic Score vs. Elevation",
+  "data": {
+    "url": "data/Airports_Malaysia.csv"
+  },
+  "params": [
+    {
+      "name": "AirportType",
+      "bind": {
+        "input": "select",
+        "options": [
+          null,
+          "large_airport",
+          "medium_airport",
+          "small_airport",
+          "heliport",
+          "balloonport"
+        ],
+        "labels": [
+          "Show All",
+          "Large Airport",
+          "Medium Airport",
+          "Small Airport",
+          "Heliport",
+          "Balloonport"
+        ],
+        "name": "Select Airport Type: "
+      }
+    }
+  ],
+  "transform": [
+    {
+      "calculate": "datum.score == 0 ? 1 : datum.score", 
+      "as": "adjusted_score"
+    },
+    {
+      "filter": "AirportType == null || datum.type == AirportType"
+    }
+  ],
+  "layer": [
+    {
+      "mark": {
+        "type": "circle",
+        "opacity": 0.6,  
+        "stroke": null,
+        "strokeWidth": 0
+      },
+      "encoding": {
+        "x": {
+          "field": "elevation_ft",
+          "type": "quantitative",
+          "title": "Elevation (ft)",
+          "scale": {"zero": false}
+        },
+        "y": {
+          "field": "adjusted_score",  
+          "type": "quantitative",
+          "title": "Traffic Score",
+          "scale": {"type": "log", "domain": [1, 1100000]},  
+          "axis": {
+            "tickCount": 6,
+            "grid": true,
+            "format": "~s",
+            "titleFontWeight": "bold"
+          }
+        },
+        "color": {
+          "field": "type",
+          "type": "nominal",
+          "title": "Airport Type",
+          "scale": {
+            "domain": [
+              "large_airport",
+              "medium_airport",
+              "small_airport",
+              "heliport",
+              "balloonport"
+            ],
+            "range": [
+              "#e41a1c",
+              "#377eb8",
+              "#4daf4a",
+              "#984ea3",
+              "#ff7f00"
+            ]
+          },
+          "legend": {"orient": "right"}
+        },
+        "size": {
+          "condition": {
+            "test": "datum.score == 0",
+            "value": 15  
+          },
+          "value": 40  
+        },
+        "tooltip": [
+          {"field": "name", "type": "nominal", "title": "Airport Name: "},
+          {"field": "type", "type": "nominal", "title": "Airport Type: "},
+          {
+            "field": "elevation_ft",
+            "type": "quantitative",
+            "title": "Elevation (ft): ",
+            "format": ","
+          },
+          {
+            "field": "score",
+            "type": "quantitative",
+            "title": "Traffic Score: ",
+            "format": ","
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "baseline": "middle",
+        "dx": 7,
+        "dy": -7,
+        "fontSize": 10,
+        "fontStyle": "italic"
+      },
+      "transform": [
+        {
+          "filter": "datum.score > 5000"
+        }
+      ],
+      "encoding": {
+        "x": {"field": "elevation_ft", "type": "quantitative"},
+        "y": {"field": "adjusted_score", "type": "quantitative"},
+        "text": {"field": "name", "type": "nominal"},
+        "opacity": {"value": 1}
+      }
+    }
+  ],
+  "config": {
+    "mark": {
+      "hover": {"size": 70}
+    }
+  }
+}
