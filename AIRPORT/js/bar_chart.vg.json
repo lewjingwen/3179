@@ -1,0 +1,36 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 450,
+  "height": 450,
+  "title": "Number of Airports by Region in Malaysia",
+  "data": {
+    "url": "data/Airports_Malaysia.csv"
+  },
+  "transform": [
+    {
+      "filter": "datum.type != 'closed'"
+    }
+  ],
+  "mark": {
+    "type": "bar",
+    "color": "#ADD8E6"  
+  },
+  "encoding": {
+    "y": {
+      "field": "region_name",
+      "type": "nominal",
+      "title": "Region",
+      "sort": "-x"
+    },
+    "x": {
+      "aggregate": "count",
+      "field": "region_name",
+      "type": "quantitative",
+      "title": "Number of Airports"
+    },
+    "tooltip": [
+      {"field": "region_name", "title": "Region"},
+      {"aggregate": "count", "field": "region_name", "title": "Number of Airports"}
+    ]
+  }
+}

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Airport Visualizations | Interactive Visualisations</title>
+
+  <!-- Import Vega & Vega-Lite (from CDN) -->
+  <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+
+</head>
+<body>
+
+  <!-- Title for the page -->
+  <h1>Airport Visualizations</h1>
+
+  <!-- Main Section for the Symbol Map with description beside it -->
+  <div class="main-section">
+    <div id="symbol_map" class="vis-container"></div>
+    <div class="description">
+      <h3>Map of Airports in Malaysia</h3>
+      <p>This map shows the geographical distribution of airports in Malaysia. The size of each circle represents passenger traffic volume. This provides a broad overview of the locations and sizes of different airports in Malaysia.</p>
+    </div>
+  </div>
+
+  <!-- Three-column layout for scatter plot, pie chart, and bar chart -->
+  <div class="chart-section">
+    <!-- Scatter Plot -->
+    <div class="chart-container">
+      <h2 class="chart-title">Scatter Plot: Airport Traffic vs. Elevation</h2>
+      <div id="scatter_plot" class="vis-container"></div>
+      <p class="chart-description">This scatter plot shows the correlation between the elevation of an airport and its traffic score.</p>
+    </div>
+
+    <!-- Pie Chart -->
+    <div class="chart-container">
+      <h2 class="chart-title">Pie Chart: Airport Types in Malaysia</h2>
+      <div id="pie_chart" class="vis-container"></div>
+      <p class="chart-description">This pie chart visualizes the proportion of different airport types (e.g., large, medium, heliport) across Malaysia.</p>
+    </div>
+
+    <!-- Bar Chart -->
+    <div class="chart-container">
+      <h2 class="chart-title">Bar Chart: Airports by Region</h2>
+      <div id="bar_chart" class="vis-container"></div>
+      <p class="chart-description">This bar chart displays the number of airports in each region of Malaysia, showing which regions have the most airports.</p>
+    </div>
+  </div>
+
+  <!-- Vega-Lite embed scripts -->
+  <script type="text/javascript">
+    // Embed Symbol Map
+    vegaEmbed('#symbol_map', 'js/symbol_map.vg.json').catch(console.error);
+
+    // Embed Scatter Plot
+    vegaEmbed('#scatter_plot', 'js/scatter_plot_interactive.vg.json').catch(console.error);
+
+    // Embed Pie Chart
+    vegaEmbed('#pie_chart', 'js/pie_chart.vg.json').catch(console.error);
+
+    // Embed Bar Chart
+    vegaEmbed('#bar_chart', 'js/bar_chart.vg.json').catch(console.error);
+  </script>
+
+</body>
+</html>

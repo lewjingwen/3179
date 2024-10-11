@@ -1,0 +1,15 @@
+#scatter_plot {
+    margin-top: 20px; /* Reduce this value to bring the visualization closer to the title */
+    margin-bottom: 20px; /* Reduce the gap before the next element */
+    left: 100px;
+    right: 100px;
+}
+
+#symbol_map {
+    margin-top: 20px; /* Reduce this value to bring the visualization closer to the title */
+    margin-bottom: 20px; /* Reduce the gap before the next element */
+    left: 100px;
+    right: 100px;
+}
+
+

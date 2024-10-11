@@ -1,0 +1,53 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "width": 450,
+    "height": 480,
+    "title": "Proportion of Different Airport Types in Malaysia",
+    "data": {
+      "url": "data/Airports_Malaysia.csv"
+    },
+    "transform": [
+      {
+        "filter": "datum.type != 'closed'"
+      },
+      {
+        "aggregate": [{"op": "count", "as": "count"}],
+        "groupby": ["type"]
+      }
+    ],
+    "mark": "arc",
+    "encoding": {
+      "theta": {
+        "field": "count",
+        "type": "quantitative",
+        "stack": true
+      },
+      "color": {
+        "field": "type",
+        "type": "nominal",
+        "title": "Airport Type",
+        "scale": {
+          "domain": [
+            "large_airport",
+            "medium_airport",
+            "small_airport",
+            "heliport",
+            "balloonport"
+          ],
+          "range": [
+            "#e41a1c",
+            "#377eb8",
+            "#4daf4a",
+            "#984ea3",
+            "#ff7f00"
+          ]
+        },
+        "legend": {"orient": "right"}
+      },
+      "tooltip": [
+        {"field": "type", "type": "nominal", "title": "Airport Type"},
+        {"field": "count", "type": "quantitative", "title": "Count"}
+      ]
+    }
+  }
+  
