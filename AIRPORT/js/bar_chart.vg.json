@@ -1,8 +1,8 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "width": 450,
-  "height": 450,
-  "title": "Number of Airports by Region in Malaysia",
+  "width": 700,
+  "height": 400,
+  "title": "Number of Airports by Region",
   "data": {
     "url": "data/Airports_Malaysia.csv"
   },
@@ -11,26 +11,62 @@
       "filter": "datum.type != 'closed'"
     }
   ],
-  "mark": {
-    "type": "bar",
-    "color": "#ADD8E6"  
-  },
-  "encoding": {
-    "y": {
-      "field": "region_name",
-      "type": "nominal",
-      "title": "Region",
-      "sort": "-x"
+  "layer": [
+    {
+      "mark": {
+        "type": "bar"
+      },
+      "encoding": {
+        "x": {
+          "aggregate": "count",
+          "field": "region_name",
+          "type": "quantitative",
+          "title": "Number of Airports"
+        },
+        "y": {
+          "field": "region_name",
+          "type": "nominal",
+          "title": "Region",
+          "sort": "-x"
+        },
+        "color": {
+          "condition": {
+            "test": "datum.region_name == 'Sabah' || datum.region_name == 'Sarawak'",
+            "value": "red"
+          },
+          "value": "#211496"
+        },
+        "tooltip": [
+          {"field": "region_name", "title": "Region"},
+          {"aggregate": "count", "field": "region_name", "title": "Number of Airports"}
+        ]
+      }
     },
-    "x": {
-      "aggregate": "count",
-      "field": "region_name",
-      "type": "quantitative",
-      "title": "Number of Airports"
-    },
-    "tooltip": [
-      {"field": "region_name", "title": "Region"},
-      {"aggregate": "count", "field": "region_name", "title": "Number of Airports"}
-    ]
-  }
+    {
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "baseline": "middle",
+        "dx": 3
+      },
+      "encoding": {
+        "x": {
+          "aggregate": "count",
+          "field": "region_name",
+          "type": "quantitative"
+        },
+        "y": {
+          "field": "region_name",
+          "type": "nominal",
+          "sort": "-x"
+        },
+        "text": {
+          "aggregate": "count",
+          "field": "region_name",
+          "type": "quantitative"
+        },
+        "color": {"value": "black"}
+      }
+    }
+  ]
 }

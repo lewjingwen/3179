@@ -10,44 +10,131 @@
   <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
 
+  <!-- CSS for layout and styling -->
+  <style>
+
+    /* Blue container */
+    .blue-container {
+      background-color: #ADD8E6; /* Light blue background */
+      padding: 30px;
+      margin: 0 auto;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
+      max-width: 1200px; 
+      height: auto; 
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    /* Layout 1 */
+    .main-section, .chart-section {
+      display: grid;
+      grid-template-columns: 1fr 2fr; /* Description first, chart second */
+      gap: 30px; 
+      margin-bottom: 40px; 
+    }
+
+    /* Layout 2 */
+    .chart-section.left-right {
+      grid-template-columns: 2fr 1fr; /* Chart first, description second */
+    }
+
+    .vis-container {
+      height: 480px;
+      width: 100%;
+    }
+
+    .description, .chart-description {
+      padding: 10px;
+      font-size: 17px;
+      display: flex; 
+      align-items: center; 
+    }
+
+    /* Bold important text */
+    strong {
+      font-weight: bold;
+    }
+
+    /* Footer styling */
+    .footer {
+      font-size: 20px;
+      text-align: left;
+      border-top: 1px solid #ccc;
+      padding-top: 10px;
+      margin-top: 40px;
+    }
+
+  </style>
 </head>
 <body>
 
-  <!-- Title for the page -->
-  <h1>Airport Visualizations</h1>
+  <!-- Blue Container -->
+  <div class="blue-container">
+    <!-- Title for the page -->
+    <h1>Airports in Malaysia</h1>
 
-  <!-- Main Section for the Symbol Map with description beside it -->
-  <div class="main-section">
-    <div id="symbol_map" class="vis-container"></div>
-    <div class="description">
-      <h3>Map of Airports in Malaysia</h3>
-      <p>This map shows the geographical distribution of airports in Malaysia. The size of each circle represents passenger traffic volume. This provides a broad overview of the locations and sizes of different airports in Malaysia.</p>
+    <!-- Main Section: Symbol Map-->
+    <div class="main-section">
+      <div id="symbol_map" class="vis-container"></div>
+      <div class="description">
+        <p>
+          <strong>Large airports</strong> are concentrated in key areas like <strong>Kuala Lumpur</strong>, emphasizing their role in <strong>national and international air traffic</strong>. 
+          <strong>Medium and small airports</strong> are distributed more evenly throughout the country, supporting <strong>regional connectivity</strong>. 
+          <strong>Heliports and balloonports</strong> are less prevalent, serving <strong>specialized transportation needs</strong>.
+        </p>
+      </div>
     </div>
-  </div>
 
-  <!-- Three-column layout for scatter plot, pie chart, and bar chart -->
-  <div class="chart-section">
-    <!-- Scatter Plot -->
-    <div class="chart-container">
-      <h2 class="chart-title">Scatter Plot: Airport Traffic vs. Elevation</h2>
+    <!-- Scatter Plot Section -->
+    <div class="chart-section left-right">
+      <div class="chart-description">
+        <p>
+          <strong>Large airports</strong>, like <strong>Kuala Lumpur International Airport</strong>, are strategically located at <strong>lower elevations</strong> to accommodate <strong>higher air traffic volume</strong> efficiently. 
+          <strong>Lower elevations</strong> make it easier for <strong>larger aircraft</strong> to take off and land, which is essential for airports handling <strong>higher traffic, both international and domestic</strong>. 
+          <strong>Small and medium airports</strong>, located across <strong>varying elevations</strong>, serve <strong>regional or local travel</strong>, focusing more on <strong>connectivity</strong> than on high-volume operations.
+        </p>
+      </div>
       <div id="scatter_plot" class="vis-container"></div>
-      <p class="chart-description">This scatter plot shows the correlation between the elevation of an airport and its traffic score.</p>
     </div>
 
-    <!-- Pie Chart -->
-    <div class="chart-container">
-      <h2 class="chart-title">Pie Chart: Airport Types in Malaysia</h2>
+    <!-- Pie Chart Section -->
+    <div class="chart-section">
       <div id="pie_chart" class="vis-container"></div>
-      <p class="chart-description">This pie chart visualizes the proportion of different airport types (e.g., large, medium, heliport) across Malaysia.</p>
+      <div class="chart-description">
+        <p>
+          <strong>Small airports</strong> make up the largest portion of airports in Malaysia because they are <strong>essential for connecting rural or less populated areas</strong>. 
+          These airports handle mostly <strong>domestic flights</strong> or serve as hubs for <strong>smaller regions</strong>, supporting <strong>local economies</strong> and improving <strong>accessibility</strong>. 
+          They require <strong>less infrastructure and investment</strong> compared to large international airports, making them more feasible in remote locations.
+        </p>
+      </div>
     </div>
 
-    <!-- Bar Chart -->
-    <div class="chart-container">
-      <h2 class="chart-title">Bar Chart: Airports by Region</h2>
+    <!-- Bar Chart Section -->
+    <div class="chart-section left-right">
+      <div class="chart-description">
+        <p>
+          <strong>Sabah and Sarawak</strong>, the top two regions with <strong>35</strong> and <strong>32 airports</strong> respectively, have more airports due to their <strong>large land areas</strong> and <strong>challenging terrains</strong>, which require more air travel to connect remote regions. 
+          In contrast, <strong>Putrajaya and Labuan</strong> have fewer airports due to their <strong>smaller size</strong> and <strong>proximity to major airports</strong> like Kuala Lumpur International Airport, which efficiently serves their transportation needs.
+        </p>
+      </div>
       <div id="bar_chart" class="vis-container"></div>
-      <p class="chart-description">This bar chart displays the number of airports in each region of Malaysia, showing which regions have the most airports.</p>
     </div>
+
+    <!-- Footer inside the blue container -->
+    <div class="footer">
+      <p><strong>Author:</strong> Lew Jing Wen (32937903)</p>
+      <p><strong>Date Updated:</strong> 13/10/2024</p>
+      <p><strong>Source Link:</strong> <a href="#">https://data.humdata.org/dataset/ourairports-mys</a></p>
+    </div>
+    
   </div>
+
+
+
 
   <!-- Vega-Lite embed scripts -->
   <script type="text/javascript">

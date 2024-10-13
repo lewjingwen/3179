@@ -1,6 +1,6 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "width": 450,
+  "width": 700,
   "height": 400,
   "title": "Airport Traffic Score vs. Elevation",
   "data": {
@@ -64,8 +64,7 @@
           "axis": {
             "tickCount": 6,
             "grid": true,
-            "format": "~s",
-            "titleFontWeight": "bold"
+            "format": "~s"
           }
         },
         "color": {
@@ -81,7 +80,7 @@
               "balloonport"
             ],
             "range": [
-              "#e41a1c",
+              "#1abc9c",
               "#377eb8",
               "#4daf4a",
               "#984ea3",
@@ -92,8 +91,8 @@
         },
         "size": {
           "condition": {
-            "test": "datum.score == 0",
-            "value": 15  
+            "test": "datum.type == 'large_airport'",
+            "value": 200  
           },
           "value": 40  
         },
@@ -119,7 +118,6 @@
       "mark": {
         "type": "text",
         "align": "left",
-        "baseline": "middle",
         "dx": 7,
         "dy": -7,
         "fontSize": 10,
@@ -137,10 +135,5 @@
         "opacity": {"value": 1}
       }
     }
-  ],
-  "config": {
-    "mark": {
-      "hover": {"size": 70}
-    }
-  }
+  ]
 }
